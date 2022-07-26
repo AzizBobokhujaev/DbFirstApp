@@ -30,7 +30,8 @@ namespace DbFirstApp.Controllers
             var offers =  _context.Offers.Where(o => o.PartnerId == partner!.Id && o.Price>0 && o.Quantity>0&&o.IsVisible.Equals(true)).Select(x=>new GetListOffer()
             {
                 Id = x.Id,
-                Condition = x.Partner.Conditions.FirstOrDefault()
+                Partner = partner,
+                Condition = partner.Conditions.FirstOrDefault()
             });
             return await offers.ToListAsync();
         }
